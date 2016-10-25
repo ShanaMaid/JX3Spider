@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set("Asia/Shanghai");
 	 $start_time = 1477385506;
 	while (true) {
 		$fp_raw = fopen("raw.txt","r");
