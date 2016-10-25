@@ -13,7 +13,7 @@
 		fclose($fp_raw);
 		$days = (int)((time()-$start_time+86400)/86400);
 		$fp_mid = fopen("mid.md","w");
-		fwrite($fp_mid, "目前收录帖子总数:$raw_now  \r\n最后一次更新:".date('Y年m月d日 H:i:s',strtotime('-1 day',time()))."  \r\n存活时间:".$days."天  \r\n  \r\n  \r\n Log  \r\n===  \r\n");
+		fwrite($fp_mid, "目前收录帖子总数:$raw_now  \r\n最后一次更新:".date('Y年m月d日 H:i:s',strtotime(time()))."  \r\n存活时间:".$days."天  \r\n  \r\n  \r\n Log  \r\n===  \r\n");
 		fclose($fp_mid);
 		$update = $raw_now-$raw_old;
 
@@ -33,10 +33,10 @@
 		//git  -add 
 
 		exec("git add -A",$out);
-		exec("git commit -m \"".date('Y-m-d H:i:s',strtotime('-1 day',time()))."\"",$out);
+		exec("git commit -m \"".date('Y-m-d H:i:s',strtotime(time()))."\"",$out);
 		exec("git push origin master",$out);
 		
-		echo "OK ".date('Y-m-d H:i:s',strtotime('-1 day',time()));
+		echo "OK ".date('Y-m-d H:i:s',strtotime(time()));
 
 		// echo time()-$time;
 		sleep(86400/3);//一天更新3次

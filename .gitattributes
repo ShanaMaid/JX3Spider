@@ -1,0 +1,3 @@
+*.txt linguist-language=PHP
+*.md linguist-language=PHP
+*.html linguist-language=PHP
