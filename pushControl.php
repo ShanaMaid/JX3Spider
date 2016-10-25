@@ -33,7 +33,7 @@
 
 		exec("git add -A",$out);
 		exec("git commit -m \"".date('Y-m-d H:i:s',strtotime('-1 day',time()))."\"",$out);
-		exex("git push origin master",$out);
+		exec("git push origin master",$out);
 		
 		echo "OK ".date('Y-m-d H:i:s',strtotime('-1 day',time()));
 
