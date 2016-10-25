@@ -40,7 +40,7 @@ function _getUrlContent($url){
 */
 function _spiderGo($url){
 	 	//$end=10;
-		$fp_puts = fopen("result\\cardName.html","a+");//记录url列表
+		$fp_puts = fopen("result\\cardName.md","a+");//记录url列表
 	 	$fp_card_id = fopen("result\\cardID.txt","a+");
 	 	$id_number = 0;
 	 	$id_arr = array();
