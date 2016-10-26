@@ -65,6 +65,10 @@ function _spiderGo($url){
 			
 		}
 
+		if ($k==50) {
+			$k=0;
+		}
+
 	 }
 	 		
 	  		 fclose($fp_puts);
