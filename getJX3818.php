@@ -49,15 +49,17 @@ function _spiderGo($url){
 		  $id_arr[$id_number++] = fgets($fp_card_id);
 		  
 		  }
-
+		  
 		  $id_number--;//消除最后一行的空行
-
+		 
 	 	for($k=0;;$k++){
 	 	$list = _getTagCard($url,$k*10);
 	 	
-	 	for ($i=0; $i<sizeof($list) ; $i++) { 
-	 		if (isHave($id_arr,$list[$i][1])) 
-		  		break;
+	 	for ($i=0; $i<sizeof($list); $i++) { 
+	 		if(isHave($id_arr,$list[$i][1])){
+	 			continue;
+	 		}
+	 			
 	 		 $card_url = 'http://tieba.baidu.com/p/'.$list[$i][1].'?see_lz=1&pn=';
 	 		 $id_arr[$id_number++] = $list[$i][1];
  			 fwrite($fp_puts,"<a href=\"".$card_url."\">".$list[$i][0]."</a><br/>\r\n"); 
@@ -163,7 +165,9 @@ function _nextPostBarPageUrl($url,$current){
 }
 
 function isHave($arr,$id){
+	
 	for ($i=0; $i < sizeof($arr); $i++) { 
+		
 		if ($arr[$i] == $id) {
 			return true;
 		}
