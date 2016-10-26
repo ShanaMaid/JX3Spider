@@ -54,11 +54,12 @@ function _spiderGo($url){
 		 
 	 	for($k=0;;$k++){
 	 	$list = _getTagCard($url,$k*10);
-	 	
+	 			
 	 	for ($i=0; $i<sizeof($list); $i++) { 
 	 		if(isHave($id_arr,$list[$i][1])){
 	 			continue;
 	 		}
+		  
 	 			
 	 		 $card_url = 'http://tieba.baidu.com/p/'.$list[$i][1].'?see_lz=1&pn=';
 	 		 $id_arr[$id_number++] = $list[$i][1];
@@ -67,9 +68,9 @@ function _spiderGo($url){
 			
 		}
 
-		if ($k==50) {
-			$k=0;
-		}
+		// if ($k==50) {
+		// 	$k=0;
+		// }
 
 	 }
 	 		
@@ -168,7 +169,7 @@ function isHave($arr,$id){
 	
 	for ($i=0; $i < sizeof($arr); $i++) { 
 		
-		if ($arr[$i] == $id) {
+		if ($arr[$i] == (int)$id) {
 			return true;
 		}
 	}
