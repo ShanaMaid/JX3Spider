@@ -2,6 +2,7 @@
 	date_default_timezone_set("Asia/Shanghai");
 	 $start_time = 1477385506;
 	while (true) {
+		sleep(86400/3);//一天更新3次
 		$fp_raw = fopen("raw.txt","r");
 		$raw_old = fgets($fp_raw);
 		fclose($fp_raw);
@@ -31,7 +32,7 @@
 
 
 		//git  -add 
-
+		exec("git pull origin master",$out);
 		exec("git add -A",$out);
 		exec("git commit -m \"".date('Y-m-d H:i:s',time())."\"",$out);
 		exec("git push origin master",$out);
@@ -39,7 +40,7 @@
 		echo "OK ".date('Y-m-d H:i:s',time());
 
 		// echo time()-$time;
-		sleep(86400/3);//一天更新3次
+		
 	}
 
 ?>

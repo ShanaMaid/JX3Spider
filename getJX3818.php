@@ -51,27 +51,24 @@ function _spiderGo($url){
 		  }
 		  
 		  $id_number--;//消除最后一行的空行
-		 
+		
 	 	for($k=0;;$k++){
-	 	$list = _getTagCard($url,$k*10);
-	 			
+	 	$list = _getTagCard($url,$k*10);	
 	 	for ($i=0; $i<sizeof($list); $i++) { 
-	 		if(isHave($id_arr,$list[$i][1])){
+	 		if(isHave($id_arr,$list[$i][1]."\r\n")){	
 	 			continue;
 	 		}
-		  
 	 			
 	 		 $card_url = 'http://tieba.baidu.com/p/'.$list[$i][1].'?see_lz=1&pn=';
-	 		 $id_arr[$id_number++] = $list[$i][1];
+	 		 $id_arr[$id_number++] = $list[$i][1]."\r\n";
  			 fwrite($fp_puts,"<a href=\"".$card_url."\">".$list[$i][0]."</a><br/>\r\n"); 
  			 fwrite($fp_card_id,$list[$i][1]."\r\n"); 
-			
-		}
+		
 
-		// if ($k==50) {
-		// 	$k=0;
-		// }
-
+		 if ($k==50) {
+		 	$k=0;
+		 }
+ 		}
 	 }
 	 		
 	  		 fclose($fp_puts);
@@ -169,7 +166,7 @@ function isHave($arr,$id){
 	
 	for ($i=0; $i < sizeof($arr); $i++) { 
 		
-		if ($arr[$i] == (int)$id) {
+		if ($arr[$i] == $id) {
 			return true;
 		}
 	}
