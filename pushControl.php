@@ -2,7 +2,7 @@
 	date_default_timezone_set("Asia/Shanghai");
 	 $start_time = 1477385506;
 	while (true) {
-		sleep(86400/3);//一天更新3次
+		
 		$fp_raw = fopen("raw.txt","r");
 		$raw_old = fgets($fp_raw);
 		fclose($fp_raw);
@@ -38,7 +38,7 @@
 		exec("git push origin master",$out);
 		
 		echo "OK ".date('Y-m-d H:i:s',time());
-
+		sleep(86400/3);//一天更新3次
 		// echo time()-$time;
 		
 	}
