@@ -63,6 +63,10 @@ function _spiderGo($url){
 	 		 $id_arr[$id_number++] = $list[$i][1]."\r\n";
  			 fwrite($fp_puts,"<a href=\"".$card_url."\">".$list[$i][0]."</a><br/>\r\n"); 
  			 fwrite($fp_card_id,$list[$i][1]."\r\n"); 
+
+ 			 $fp_day = fopen("result\\part\\".date('Y-m-d',time()).".md","a+");
+ 			 fwrite($fp_day,"[".$list[$i][0]."](".$card_url.")   \r\n"); 
+ 			 fclose($fp_day);
 		 
  		}
 
