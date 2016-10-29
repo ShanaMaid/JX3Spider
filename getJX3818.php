@@ -63,12 +63,13 @@ function _spiderGo($url){
 	 		 $id_arr[$id_number++] = $list[$i][1]."\r\n";
  			 fwrite($fp_puts,"<a href=\"".$card_url."\">".$list[$i][0]."</a><br/>\r\n"); 
  			 fwrite($fp_card_id,$list[$i][1]."\r\n"); 
-		
+		 
+ 		}
 
-		 if ($k==50) {
+ 		if ($k==2) {
+		 	echo "finish one  ".date('Y-m-d H:i:s',time())."\r\n";
 		 	$k=0;
 		 }
- 		}
 	 }
 	 		
 	  		 fclose($fp_puts);
