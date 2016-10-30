@@ -3,7 +3,7 @@
 剑侠情缘网络版3————百度贴吧818爬虫搜索机器人
 ====
 php托管在服务器上，自动扫描     
-定时更新，结果保存在[cardName.html](http://blog.shanamaid.top/JX3Spider/result/cardName)   
+定时更新！更多消息请加入QQ群：575517447！    
 每日更新的818、树洞查看  
 
 #### [2016年](https://github.com/ShanaMaid/JX3Spider/blob/master/result/part/2016/)  
