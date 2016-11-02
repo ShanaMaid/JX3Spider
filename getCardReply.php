@@ -47,26 +47,35 @@ $name_arr[$name_number++] = fgets($fp_card_name);
 }
 $name_number--;//消除最后一行的空行
 
+$fp_reply = fopen("result\\cardReply.md","a+");
+
 for($i=0;$i<$id_number;$i++){
 	echo "$i\r\n";
-$card_url = 'http://tieba.baidu.com/p/'.str_ireplace("\r\n","",$id_arr[$i]).'?see_lz=1&pn=';
+$card_url = 'http://tieba.baidu.com/p/'.str_ireplace("\r\n","",$id_arr[$i]);
 $page_content = _getUrlContent($card_url);
-$tag =  "/([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))/";
-$tag_name = "/>(.*?)</";
-if(!preg_match($tag,$page_content,$time)){
-	echo "fail\r\n";
+$tag =  '/<span class="red" style="margin-right:3px">[0-9]*<\/span>/'; //帖子回复数
+$tag_name = "/>(.*?)</"; //获取>XXX<
+if(!preg_match($tag,$page_content,$reply_str)){
+	echo "fail1\r\n";
 	continue;
 }
+
+if(!preg_match($tag_name, $reply_str[0],$reply_number)){
+	echo "fail2\r\n";
+	continue;
+}
+
 if(!preg_match($tag_name,$name_arr[$i+1],$result)){
-	echo "fail\r\n";
+	echo "fail3\r\n";
 	continue;
 }
 	
 
-	 $fp_day = fopen("result\\part\\".$time[0].".md","a+");
- 	 fwrite($fp_day,"[".str_ireplace(">","",str_ireplace("<","",$result[0]))."](".$card_url.")   \r\n"); 
- 	 fclose($fp_day);
+	
+ 	 fwrite($fp_reply,"[".str_ireplace(">","",str_ireplace("<","",$result[0]))."](".$card_url.")    >".str_ireplace(">","",str_ireplace("<","",$reply_number[0]))."回复<   \r\n"); 
+ 	
  	}
+ fclose($fp_reply);
 fclose($fp_card_id);
 fclose($fp_card_name);
 ?>
