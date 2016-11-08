@@ -40,8 +40,8 @@ function _getUrlContent($url){
 */
 function _spiderGo($url){
 	 	//$end=10;
-		$fp_puts = fopen("result\\cardName.html","a+");//记录url列表
-	 	$fp_card_id = fopen("result\\cardID.txt","a+");
+		$fp_puts = fopen("result\\cardName-Ghost.html","a+");//记录url列表
+	 	$fp_card_id = fopen("result\\cardID-Ghost.txt","a+");
 	 	$id_number = 0;
 	 	$id_arr = array();
 	 	while(! feof($fp_card_id))
@@ -61,7 +61,7 @@ function _spiderGo($url){
 	 			echo " update  ".date('Y-m-d H:i:s',time())."\r\n";
 	 		 $card_url = 'http://tieba.baidu.com/p/'.$list[$i][1].'?see_lz=1&pn=';
 	 		 $id_arr[$id_number++] = $list[$i][1]."\r\n";
- 			 fwrite($fp_puts,"<a href=\"".$card_url."\">".$list[$i][0]."</a><br/>\r\n"); 
+ 			 fwrite($fp_puts,$list[$i][0]."\r\n"); 
  			 fwrite($fp_card_id,$list[$i][1]."\r\n"); 
 
  			 $fp_day = fopen("result\\part\\".date('Y',time())."\\".date('m',time())."\\".date('Y-m-d',time()).".md","a+");
@@ -133,7 +133,7 @@ function _getTagCard($url,$start){
 	$tag_card_url = '/[0-9]+/';//帖子地址
 	$tag_card_title = '/e=".*" t/';//帖子名字
 	$tag_get_rel_title = '/[^"]{10,1000}/';//帖子的真正名字
-	$tag_choose='/.*(818|树洞).*/';
+	$tag_choose='/.*(鬼网).*/';
 	//echo $content;
 	$counter = 0;
 	for($cur=-1;$cur<10;$cur++){
