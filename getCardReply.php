@@ -25,7 +25,7 @@ function _getUrlContent($url){
 
 
 
-$fp_card_id = fopen("result\\cardID.txt","a+");
+$fp_card_id = fopen("result\\cardID-Ghost.txt","a+");
 $id_number = 0;
 $id_arr = array();
 while(! feof($fp_card_id))
@@ -37,17 +37,17 @@ $id_arr[$id_number++] = fgets($fp_card_id);
 $id_number--;//消除最后一行的空行
 
 
-$fp_card_name = fopen("result\\cardName.html","a+");
-$name_number = 0;
-$name_arr = array();
-while(! feof($fp_card_name))
-{
-$name_arr[$name_number++] = fgets($fp_card_name);
+// $fp_card_name = fopen("result\\cardName.html","a+");
+// $name_number = 0;
+// $name_arr = array();
+// while(! feof($fp_card_name))
+// {
+// $name_arr[$name_number++] = fgets($fp_card_name);
 
-}
-$name_number--;//消除最后一行的空行
+// }
+// $name_number--;//消除最后一行的空行
 
-$fp_reply = fopen("result\\cardReply.md","a+");
+$fp_reply = fopen("result\\cardReply-Ghost.md","a+");
 
 for($i=0;$i<$id_number;$i++){
 	echo "$i\r\n";
@@ -56,26 +56,28 @@ $page_content = _getUrlContent($card_url);
 $tag =  '/<span class="red" style="margin-right:3px">[0-9]*<\/span>/'; //帖子回复数
 $tag_name = "/>(.*?)</"; //获取>XXX<
 if(!preg_match($tag,$page_content,$reply_str)){
+	fwrite($fp_reply," \r\n"); 
 	echo "fail1\r\n";
 	continue;
 }
 
 if(!preg_match($tag_name, $reply_str[0],$reply_number)){
+	fwrite($fp_reply," \r\n"); 
 	echo "fail2\r\n";
 	continue;
 }
 
-if(!preg_match($tag_name,$name_arr[$i+1],$result)){
-	echo "fail3\r\n";
-	continue;
-}
+// if(!preg_match($tag_name,$name_arr[$i+1],$result)){
+// 	echo "fail3\r\n";
+// 	continue;
+// }
 	
 
 	
- 	 fwrite($fp_reply,"[".str_ireplace(">","",str_ireplace("<","",$result[0]))."](".$card_url.")    >".str_ireplace(">","",str_ireplace("<","",$reply_number[0]))."回复<   \r\n"); 
+ 	 fwrite($fp_reply,str_ireplace(">","",str_ireplace("<","",$reply_number[0]))." \r\n"); 
  	
  	}
  fclose($fp_reply);
 fclose($fp_card_id);
-fclose($fp_card_name);
+// fclose($fp_card_name);
 ?>
